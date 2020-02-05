@@ -45,9 +45,9 @@
       </tags>
   </entry>
   <entry>
-    <title>B1001 害死人不偿命的(3n+1)猜想 （15）[模拟]</title>
-    <url>/2020/02/04/B1001-%E5%AE%B3%E6%AD%BB%E4%BA%BA%E4%B8%8D%E5%81%BF%E5%91%BD%E7%9A%84-3n-1-%E7%8C%9C%E6%83%B3-%EF%BC%8815%EF%BC%89-%E6%A8%A1%E6%8B%9F/</url>
-    <content><![CDATA[<p>PAT 乙级 B1001 害死人不偿命的(3n+1)猜想 （15）[模拟] </p>
+    <title>B1001 害死人不偿命的(3n+1)猜想 (15) [模拟]</title>
+    <url>/2020/02/04/B1001-%E5%AE%B3%E6%AD%BB%E4%BA%BA%E4%B8%8D%E5%81%BF%E5%91%BD%E7%9A%84-3n-1-%E7%8C%9C%E6%83%B3-(15)-%E6%A8%A1%E6%8B%9F/</url>
+    <content><![CDATA[<p>PAT 乙级 B1001 害死人不偿命的(3n+1)猜想 (15) [模拟] </p>
 <a id="more"></a>
 
 
@@ -71,12 +71,6 @@
 </ul>
 <p>代码实现：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, count = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n % <span class="number">2</span> != <span class="number">0</span>)</span><br><span class="line">           n = <span class="number">3</span> * n + <span class="number">1</span>;</span><br><span class="line">        n = n / <span class="number">2</span>;</span><br><span class="line">        count ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; count;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
 
 ]]></content>
       <categories>
