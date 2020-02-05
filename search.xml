@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>B1002 写出这个数 (20) [字符串处理]</title>
+    <url>/2020/02/05/B1002-%E5%86%99%E5%87%BA%E8%BF%99%E4%B8%AA%E6%95%B0-20-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>PAT 乙级 B1002 写出这个数 (20) [字符串处理]</p>
+<a id="more"></a>
+
+
+
+<blockquote>
+<p>读入一个正整数 <em>n</em>，计算其各位数字之和，用汉语拼音写出和的每一位数字。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例，即给出自然数 <em>n</em> 的值。这里保证 <em>n</em> 小于 10^100。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行内输出 <em>n</em> 的各位数字之和的每一位，拼音数字间有 1 空格，但一行中最后一个拼音数字后没有空格。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1234567890987654321123456789</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yi san wu</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>思路分析：</p>
+<ul>
+<li><p>使用string接收读入的自然数n</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> n;  <span class="comment">//默认初始化，n是一个空字符串</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> str[<span class="number">10</span>] = &#123;<span class="string">"ling"</span>,<span class="string">"yi"</span>,<span class="string">"er"</span>, <span class="string">"san"</span>, <span class="string">"si"</span>, <span class="string">"wu"</span>, <span class="string">"liu"</span>, <span class="string">"qi"</span>, <span class="string">"ba"</span>, <span class="string">"jiu"</span>&#125;;  <span class="comment">//将字符数组初始化</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将string中每一位数字累加，保存到sum</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">sum = sum + (n[i] - <span class="string">'0'</span>);  <span class="comment">//使用运算符时，自动将操作数转换为相同的类型</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将sum转化为string类型的num</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> num = to_string(sum);  <span class="comment">//调用to_string函数将整型sum转化为string类型的num</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>依次对num中每一位输出对应的汉语拼音</p>
+</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">string</span> str[<span class="number">10</span>] = &#123;<span class="string">"ling"</span>,<span class="string">"yi"</span>,<span class="string">"er"</span>, <span class="string">"san"</span>, <span class="string">"si"</span>, <span class="string">"wu"</span>, <span class="string">"liu"</span>, <span class="string">"qi"</span>, <span class="string">"ba"</span>, <span class="string">"jiu"</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n.length(); i ++)</span><br><span class="line">        sum = sum + (n[i] - <span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">string</span> num = to_string(sum);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.length(); i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span>) </span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; str[num[i] - <span class="string">'0'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>PAT</category>
+        <category>B</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>PAT_B</tag>
+        <tag>字符串处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A1002  A+B for Polynomials (25) [模拟]</title>
     <url>/2020/02/04/A1002-A-B-for-Polynomials-25-%E6%A8%A1%E6%8B%9F/</url>
     <content><![CDATA[<p>PAT 甲级 A1002  A+B for Polynomials (25) [模拟]</p>
@@ -40,8 +87,8 @@
       </categories>
       <tags>
         <tag>Code</tag>
-        <tag>PAT_A</tag>
         <tag>模拟</tag>
+        <tag>PAT_A</tag>
       </tags>
   </entry>
   <entry>
@@ -80,8 +127,8 @@
       </categories>
       <tags>
         <tag>Code</tag>
-        <tag>模拟</tag>
         <tag>PAT_B</tag>
+        <tag>模拟</tag>
       </tags>
   </entry>
 </search>
