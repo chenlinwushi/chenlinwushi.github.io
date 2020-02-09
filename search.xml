@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>A1046 Shortest Distance (20) [模拟]</title>
+    <url>/2020/02/09/A1046%20Shortest%20Distance%20(20)%20%5B%E6%A8%A1%E6%8B%9F%5D/</url>
+    <content><![CDATA[<p>PAT 甲级 A1046 Shortest Distance (20) [模拟]</p>
+<a id="more"></a>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><blockquote>
+<p>The task is really simple: given <em>N</em> exits on a highway which forms a simple cycle, you are supposed to tell the shortest distance between any pair of exits.</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. For each case, the first line contains an integer <em>N</em> (in [3,10^5]), followed by <em>N</em> integer distances <em>D</em>1 <em>D</em>2 ⋯ <em>DN</em>, where <em>Di</em> is the distance between the <em>i</em>-th and the (<em>i</em>+1)-st exits, and <em>DN</em> is between the <em>N</em>-th and the 1st exits. All the numbers in a line are separated by a space. The second line gives a positive integer <em>M</em>(≤104), with <em>M</em> lines follow, each contains a pair of exit numbers, provided that the exits are numbered from 1 to <em>N</em>. It is guaranteed that the total round trip distance is no more than 107.</p>
+<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each test case, print your results in <em>M</em> lines, each contains the shortest distance between the corresponding given pair of exits.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5 1 2 4 14 9</span><br><span class="line">3</span><br><span class="line">1 3</span><br><span class="line">2 5</span><br><span class="line">4 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3</span><br><span class="line">10</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>题目大意：</p>
+<ul>
+<li>求最短路径</li>
+</ul>
+<p>思路分析：</p>
+<ul>
+<li><p>以dis[i]表示1号节点按顺时针方向到达<strong>“i号节点顺时针方向的下一个节点”</strong>的距离（1 &lt;= i &lt;= n）</p>
+<p>默认dis[0] = 0</p>
+<p>注：==若设置为1号节点按顺时针方向到达i号节点的距离==</p>
+<p>​        ==则无法保存N号节点到1号节点的距离==</p>
+</li>
+<li><p>以A[i]表示i号到i+1号顶点的距离</p>
+</li>
+</ul>
+<p>注意点：</p>
+<ul>
+<li><p>对dis数组和sum进行预处理</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">sum += A[i];  <span class="comment">//累加sum</span></span><br><span class="line">dis[i] = sum;  <span class="comment">//预处理dis数组</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对每个查询left→right，其结果为dis(left, right)与sum - dis(left,right)中较小值</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> temp = dis[right - <span class="number">1</span>] - dis[left - <span class="number">1</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">min</span>(temp, sum - temp));</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> dis[MAXN], A[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>, query, n, left, right;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);  <span class="comment">//输入结点个数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;A[i]);</span><br><span class="line">		sum += A[i];  <span class="comment">//sum表示一圈的总距离</span></span><br><span class="line">		dis[i] = sum;  <span class="comment">//对dis数组预处理</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;query);  <span class="comment">//输入查询次数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; query; i ++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;left, &amp;right);</span><br><span class="line">		<span class="keyword">if</span>(left &gt; right)</span><br><span class="line">			swap(left, right);</span><br><span class="line">		<span class="keyword">int</span> temp = dis[right - <span class="number">1</span>] - dis[left - <span class="number">1</span>];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, <span class="built_in">min</span>(temp, sum - temp));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>PAT</category>
+        <category>A</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>PAT_A</tag>
+        <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A1042 Shuffling Machine (20) [模拟]</title>
     <url>/2020/02/08/A1042%20Shuffling%20Machine%20(20)%20%5B%E6%A8%A1%E6%8B%9F%5D/</url>
     <content><![CDATA[<p>PAT 甲级 A1042 Shuffling Machine (20) [模拟]</p>
