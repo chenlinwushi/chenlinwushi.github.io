@@ -1154,7 +1154,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #069052;
+  background: #ba8a52;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2684,12 +2684,12 @@ ul.breadcrumb li + li:last-child {
   border-bottom: 1px solid #fc6423;
 }
 ::selection {
-  background: #00c4b6;
-  color: #f7f7f7;
+  background-color: #268cf2;
+  color: #fff;
 }
 ::-moz-selection {
-  background: #00c4b6;
-  color: #f7f7f7;
+  background-color: #268cf2;
+  color: #fff;
 }
 .headband {
   height: 3px;
@@ -2732,4 +2732,7 @@ ul.breadcrumb li + li:last-child {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
+}
+footer {
+  color: #eee;
 }
