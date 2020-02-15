@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>B1003 我要通过！(20) [数学题]</title>
+    <url>/2020/02/15/B1003%20%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87%EF%BC%81(20)%20%5B%E6%95%B0%E5%AD%A6%E9%A2%98%5D/</url>
+    <content><![CDATA[<p>PAT 乙级 B1003 我要通过！(20) [数学题]</p>
+<a id="more"></a>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><blockquote>
+<p><strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p>
+<p>得到“<strong>答案正确</strong>”的条件是：</p>
+<ol>
+<li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li>
+<li>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”，其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</li>
+<li>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</li>
+</ol>
+<p>现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“<strong>答案正确</strong>”的。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 n (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>每个字符串的检测结果占一行，如果该字符串可以获得“<strong>答案正确</strong>”，则输出 <code>YES</code>，否则输出 <code>NO</code>。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">PAT</span><br><span class="line">PAAT</span><br><span class="line">AAPATAA</span><br><span class="line">AAPAATAAAA</span><br><span class="line">xPATx</span><br><span class="line">PT</span><br><span class="line">Whatever</span><br><span class="line">APAAATAA</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">YES</span><br><span class="line">YES</span><br><span class="line">YES</span><br><span class="line">YES</span><br><span class="line">NO</span><br><span class="line">NO</span><br><span class="line">NO</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>思路分析：</p>
+<ul>
+<li><p>分析正确样例规律</p>
+<blockquote>
+<p>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”,其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</p>
+</blockquote>
+<p>正确字符串：</p>
+<p>==PAT==——==PAAT==——PAAAT</p>
+<p>APATA</p>
+<p>==AAPATAA==</p>
+<p>AAAPATAAA</p>
+<blockquote>
+<p>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</p>
+</blockquote>
+<p>正确字符串：</p>
+<p>APATA——APAATAA——APAAATAAA</p>
+<p>AAPATAA——==AAPAATAAAA==</p>
+<p>总结规律：aPbTc </p>
+<p><strong><u>包含A的数目：a * b = c （b &gt;= 1）</u></strong></p>
+</li>
+<li></li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, p = <span class="number">0</span>, t = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">string</span> s;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); j++) </span><br><span class="line">    	&#123;</span><br><span class="line">        	m[s[j]]++;</span><br><span class="line">        	<span class="keyword">if</span> (s[j] == <span class="string">'P'</span>) p = j;</span><br><span class="line">        	<span class="keyword">if</span> (s[j] == <span class="string">'T'</span>) t = j;</span><br><span class="line">    	&#125;</span><br><span class="line">    <span class="keyword">if</span> (m[<span class="string">'P'</span>] == <span class="number">1</span> &amp;&amp; m[<span class="string">'A'</span>] != <span class="number">0</span> &amp;&amp; m[<span class="string">'T'</span>] == <span class="number">1</span> &amp;&amp; m.<span class="built_in">size</span>() == <span class="number">3</span> &amp;&amp; t-p!= <span class="number">1</span> &amp;&amp; p * (t-p<span class="number">-1</span>) == s.length()-t<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>PAT</category>
+        <category>B</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>PAT_B</tag>
+        <tag>数学题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>A1046 Shortest Distance (20) [模拟]</title>
     <url>/2020/02/09/A1046%20Shortest%20Distance%20(20)%20%5B%E6%A8%A1%E6%8B%9F%5D/</url>
     <content><![CDATA[<p>PAT 甲级 A1046 Shortest Distance (20) [模拟]</p>
